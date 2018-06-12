@@ -4,37 +4,37 @@ const characters = [
   {
     id: '1',
     name: 'Fry',
-    picture: ''
+    picture: 'images/fry.png'
   },
   {
     id: '2',
     name: 'Leela',
-    picture: ''
+    picture: 'images/leela.png'
   },
   {
     id: '3',
     name: 'Bender',
-    picture: ''
+    picture: 'images/bender.png'
   },
   {
     id: '4',
     name: 'Professor Hubert',
-    picture: ''
+    picture: 'images/hubert.png'
   },
   {
     id: '5',
     name: 'Zoidberg',
-    picture: ''
+    picture: 'images/zoidberg.png'
   },
   {
     id: '6',
     name: 'Amy Wong',
-    picture: ''
+    picture: 'images/amy.png'
   },
   {
     id: '7',
     name: 'Hermes Conrad',
-    picture: ''
+    picture: 'images/hermes.png'
   }
 ]
 
