@@ -7,4 +7,6 @@ import * as actions from './actions/index'
 
 const store = configureStore(initialState)
 
+store.dispatch(actions.fetchCards())
+
 render(<Root store={store} />, document.getElementById('app'))

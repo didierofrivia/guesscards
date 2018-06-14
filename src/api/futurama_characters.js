@@ -48,4 +48,4 @@ class FuturamaCharactersApi {
   }
 }
 
-export default FuturamaCharactersApi;
+export default FuturamaCharactersApi
