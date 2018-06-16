@@ -12,6 +12,26 @@ module.exports = env => {
           use: {
             loader: "babel-loader"
           }
+        },
+        {
+          test: /(\.css|\.scss|\.sass)$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            }, {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [
+                  require('autoprefixer')
+                ],
+                sourceMap: true
+              }
+            }
+          ]
         }
       ]
     },
