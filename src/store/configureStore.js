@@ -1,11 +1,12 @@
 import {createStore, compose, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
-
+import {cardsMiddleware} from '../middleware/CardsMiddleware'
 import rootReducer from '../reducers'
 
 function configureStoreProd (initialState) {
   const middlewares = [
-    thunk
+    thunk,
+    cardsMiddleware
   ]
 
   return createStore(rootReducer, initialState, compose(
@@ -16,7 +17,8 @@ function configureStoreProd (initialState) {
 
 function configureStoreDev (initialState) {
   const middlewares = [
-    thunk
+    thunk,
+    cardsMiddleware
   ]
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // add support for Redux dev tools

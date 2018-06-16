@@ -1,5 +1,7 @@
 export const initialState = {
   deck: [],
   current: {},
-  score: 0
+  guess: '',
+  score: 0,
+  playing: true
 }

@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import { initialState } from './initialState'
 
 function createReducer (initialState, handlers) {
@@ -11,25 +10,19 @@ function createReducer (initialState, handlers) {
   }
 }
 
-function updateDeck (state, action) {
-  return Object.assign([], state.cards, action.cards)
+function updateObject (oldObj, newObj) {
+  return Object.assign({}, oldObj, newObj)
 }
 
-function drawCard (state, action) {
-  return action.card
+function updateScore (state, action) {
+  return updateObject(state, {score: state.score + action.score})
 }
 
-const DeckReducer = createReducer(initialState.deck, {
-  'UPDATE_DECK': updateDeck
-})
-
-const CurrentCardReducer = createReducer(initialState.current, {
-  'DRAW_CARD': drawCard
-})
-
-const rootReducer = combineReducers({
-  deck: DeckReducer,
-  current: CurrentCardReducer
+const rootReducer = createReducer(initialState, {
+  'UPDATE_DECK': (state, action) => updateObject(state, {deck: action.deck}),
+  'DRAW_CARD': (state, action) => updateObject(state, {current: action.current}),
+  'UPDATE_SCORE': updateScore,
+  'UPDATE_GUESS': (state, action) => updateObject(state, {guess: action.guess})
 })
 
 export default rootReducer

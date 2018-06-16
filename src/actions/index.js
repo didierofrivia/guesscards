@@ -8,25 +8,51 @@ function fetchCards () {
   }
 }
 
-function nextCard (deck) {
-  const tmp = Object.assign([], deck)
-  return function (dispatch) {
-    dispatch(drawCard(tmp.pop()))
-    dispatch(updateDeck(tmp))
-  }
+function startGame () {
+  return { type: 'START_GAME' }
 }
 
-function updateDeck (cards) {
-  return { type: 'UPDATE_DECK', cards }
+function nextCard () {
+  return { type: 'NEXT_CARD' }
 }
 
-function drawCard (card) {
-  return { type: 'DRAW_CARD', card }
+function updateDeck (deck) {
+  return { type: 'UPDATE_DECK', deck }
+}
+
+function drawCard (current) {
+  return { type: 'DRAW_CARD', current }
+}
+
+function updateGuess (guess) {
+  return { type: 'UPDATE_GUESS', guess }
+}
+
+function calculateScore () {
+  return { type: 'CALCULATE_SCORE' }
+}
+
+function updateScore (score) {
+  return { type: 'UPDATE_SCORE', score }
+}
+
+function showScore () {
+  return { type: 'SHOW_SCORE' }
+}
+
+function endGame () {
+  return { type: 'END_GAME' }
 }
 
 export {
   fetchCards,
   updateDeck,
   drawCard,
-  nextCard
+  nextCard,
+  updateScore,
+  updateGuess,
+  calculateScore,
+  startGame,
+  showScore,
+  endGame
 }
