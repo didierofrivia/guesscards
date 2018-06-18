@@ -1,7 +1,9 @@
 export const initialState = {
   deck: [],
-  current: {},
+  current: {
+    picture: 'bender.png'
+  },
   guess: '',
   score: 0,
-  playing: true
+  loading: true
 }

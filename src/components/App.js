@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     current: state.current,
     score: state.score,
     guess: state.guess,
-    playing: state.playing
+    loading: state.loading
   }
 }
 
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const CardsApp = ({deck, current, score, guess, boundActionCreators}) => {
+const CardsApp = ({deck, current, score, guess, loading, boundActionCreators}) => {
   const nextVisible = (deck.length > 0)
   const startVisible = (Object.keys(current).length === 0 && current.constructor === Object)
   const startGame = (_ev) => {
@@ -40,7 +40,7 @@ const CardsApp = ({deck, current, score, guess, boundActionCreators}) => {
   const inputProps = {
     value: guess,
     onChange: updateGuess,
-    className: (nextVisible && !startVisible) ? '' : 'hidden',
+    className: (!startVisible) ? '' : 'hidden',
     type: 'text'
   }
   const nextButtonProps = {
@@ -51,19 +51,29 @@ const CardsApp = ({deck, current, score, guess, boundActionCreators}) => {
 
   const startButtonProps = {
     className: startVisible ? '' : 'hidden',
-    onClick: startGame
+    onClick: startGame,
+    disabled: loading ? true : false
   }
   const showScoreButtonProps = {
     className: (!startVisible && !nextVisible) ? '' : 'hidden',
     onClick: showScore
   }
+
+  const loadingImageProps = {
+    className: (loading) ? '' : 'hidden',
+    width: '500',
+    src: require('../images/loading.gif')
+  }
   return (
     <div>
-      <Card card={current}/>
+      <img {...loadingImageProps} />
+      <div className={(!loading) ? '' : 'hidden'}>
+        <Card card={current}/>
+      </div>
       <input {...inputProps} />
       <button {...nextButtonProps}> Next ></button>
       <button {...startButtonProps}> Start!</button>
-      <button {...showScoreButtonProps}> Show Score!</button>
+      <button {...showScoreButtonProps}> Last one!</button>
     </div>
   )
 }

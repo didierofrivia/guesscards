@@ -4,8 +4,14 @@ function fetchCards () {
   return function (dispatch) {
     FuturamaCharactersApi.getCharacters().then(response => {
       dispatch(updateDeck(response))
+      dispatch(startGame())
+      dispatch(toggleLoading(false))
     })
   }
+}
+
+function toggleLoading (loading) {
+  return { type: 'TOGGLE_LOADING', loading}
 }
 
 function startGame () {
@@ -54,5 +60,6 @@ export {
   calculateScore,
   startGame,
   showScore,
-  endGame
+  endGame,
+  toggleLoading
 }

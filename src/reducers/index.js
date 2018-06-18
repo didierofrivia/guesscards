@@ -22,7 +22,8 @@ const rootReducer = createReducer(initialState, {
   'UPDATE_DECK': (state, action) => updateObject(state, {deck: action.deck}),
   'DRAW_CARD': (state, action) => updateObject(state, {current: action.current}),
   'UPDATE_SCORE': updateScore,
-  'UPDATE_GUESS': (state, action) => updateObject(state, {guess: action.guess})
+  'UPDATE_GUESS': (state, action) => updateObject(state, {guess: action.guess}),
+  'TOGGLE_LOADING': (state, action) => updateObject(state, {loading: action.loading})
 })
 
 export default rootReducer
