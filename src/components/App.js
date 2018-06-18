@@ -2,7 +2,7 @@ import React from 'react'
 import { hot } from 'react-hot-loader'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Card from './Card'
+import GuessCard from './GuessCard'
 import * as actions from '../actions/index'
 import '../styles/styles.css';
 
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const CardsApp = ({deck, current, score, guess, loading, boundActionCreators}) => {
+const GuessCardsApp = ({deck, current, score, guess, loading, boundActionCreators}) => {
   const nextVisible = (deck.length > 0)
   const startVisible = (Object.keys(current).length === 0 && current.constructor === Object)
   const startGame = (_ev) => {
@@ -68,7 +68,7 @@ const CardsApp = ({deck, current, score, guess, loading, boundActionCreators}) =
     <div>
       <img {...loadingImageProps} />
       <div className={(!loading) ? '' : 'hidden'}>
-        <Card card={current}/>
+        <GuessCard card={current}/>
       </div>
       <input {...inputProps} />
       <button {...nextButtonProps}> Next ></button>
@@ -81,7 +81,7 @@ const CardsApp = ({deck, current, score, guess, loading, boundActionCreators}) =
 const App = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CardsApp)
+)(GuessCardsApp)
 
 
 
