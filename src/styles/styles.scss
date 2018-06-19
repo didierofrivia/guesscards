@@ -1,0 +1,84 @@
+$base-color: #ccc;
+$main-color: #7b6666;
+$lookatthis-color: #c32727;
+
+.GuessCards-container,
+.GuessCards-score-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  color: $main-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 500px;
+}
+
+.GuessCard-container,
+.GuessCards-score {
+  border: 1px solid $base-color;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.GuessCards-score-container {
+
+  &::after {
+    content: "";
+    background: center no-repeat url('../images/futurama_background.png');
+    opacity: 0.4;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    border-radius: 10px;
+    animation: animatedBackground 40s linear infinite
+  }
+}
+
+@keyframes animatedBackground {
+	from { background-position: -50 0; }
+	to { background-position: 100% 0; }
+}
+
+.GuessCards-score {
+  text-align: center;
+  font-size: 50px;
+  background: white;
+
+
+  span {
+    color: $lookatthis-color;
+  }
+}
+
+.GuessCard-image {
+  display: block;
+  max-width: 250px;
+  max-height: 500px;
+  min-height: 250px;
+  margin: 0 auto;
+}
+
+.GuessCard-input {
+  display: block;
+  max-width: 200px;
+  margin: 10px auto;
+}
+
+.GuessCard-buttons {
+  margin: 10px;
+  border-top: 1px solid $base-color;
+  padding: 10px 0;
+}
+
+.GuessCard-button {
+  display: block;
+  float: right;
+}
+
+.hidden {
+  display: none;
+}

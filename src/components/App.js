@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import GuessCard from './GuessCard'
 import * as actions from '../actions/index'
 import 'reset-css'
-import '../styles/styles.css'
+import '../styles/styles.scss'
 
 const mapStateToProps = (state) => {
   return {
@@ -62,7 +62,7 @@ const GuessCardsApp = ({
       </div>
       <div {...scoreProps}>
         <p className='GuessCards-score'>
-          <span>{score}</span>
+          Your score is: <span>{score}</span>
         </p>
       </div>
     </div>

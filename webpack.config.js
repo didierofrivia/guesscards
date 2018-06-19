@@ -30,7 +30,13 @@ module.exports = env => {
                 ],
                 sourceMap: true
               }
+            },
+            {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [path.resolve(__dirname, 'src', 'scss')]
             }
+}
           ]
         },
         {
