@@ -5,5 +5,6 @@ export const initialState = {
   },
   guess: '',
   score: 0,
-  loading: true
+  loading: true,
+  finished: false
 }

@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import GuessCard from './GuessCard'
 import * as actions from '../actions/index'
-import '../styles/styles.css';
+import 'reset-css'
+import '../styles/styles.css'
 
 const mapStateToProps = (state) => {
   return {
@@ -12,7 +13,8 @@ const mapStateToProps = (state) => {
     current: state.current,
     score: state.score,
     guess: state.guess,
-    loading: state.loading
+    loading: state.loading,
+    finished: state.finished
   }
 }
 
@@ -22,58 +24,47 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const GuessCardsApp = ({deck, current, score, guess, loading, boundActionCreators}) => {
-  const nextVisible = (deck.length > 0)
-  const startVisible = (Object.keys(current).length === 0 && current.constructor === Object)
-  const startGame = (_ev) => {
-    boundActionCreators.startGame()
-  }
-  const nextCard = (_ev) => {
-    boundActionCreators.nextCard()
-  }
-  const updateGuess = (ev) => {
-    boundActionCreators.updateGuess(ev.target.value)
-  }
-  const showScore = (_ev) => {
-    boundActionCreators.showScore()
-  }
-  const inputProps = {
-    value: guess,
-    onChange: updateGuess,
-    className: (!startVisible) ? '' : 'hidden',
-    type: 'text'
-  }
-  const nextButtonProps = {
-    disabled: (guess.length === 0) ? true : false,
-    className: (nextVisible && !startVisible) ? '' : 'hidden',
-    onClick: nextCard
-  }
-
-  const startButtonProps = {
-    className: startVisible ? '' : 'hidden',
-    onClick: startGame,
-    disabled: loading ? true : false
-  }
-  const showScoreButtonProps = {
-    className: (!startVisible && !nextVisible) ? '' : 'hidden',
-    onClick: showScore
+const GuessCardsApp = ({
+  deck,
+  current,
+  score,
+  guess,
+  loading,
+  finished,
+  boundActionCreators
+}) => {
+  const cardProps = {
+    current,
+    deck,
+    guess,
+    startGame: (_ev) => boundActionCreators.startGame(),
+    nextCard: (_ev) => boundActionCreators.nextCard(),
+    updateGuess: (ev) => boundActionCreators.updateGuess(ev.target.value),
+    showScore: (_ev) => boundActionCreators.showScore()
   }
 
   const loadingImageProps = {
-    className: (loading) ? '' : 'hidden',
-    width: '500',
+    className: (loading) ? 'GuessCards-loading' : 'GuessCards-loading hidden',
     src: require('../images/loading.gif')
   }
+
+  const scoreProps = {
+    className: (finished) ? 'GuessCards-score-container' : 'GuessCards-score-container hidden',
+  }
+
   return (
-    <div>
-      <img {...loadingImageProps} />
-      <div className={(!loading) ? '' : 'hidden'}>
-        <GuessCard card={current}/>
+    <div className='GuessCards-container'>
+      <div className="GuessCards-loading-container">
+        <img {...loadingImageProps} />
       </div>
-      <input {...inputProps} />
-      <button {...nextButtonProps}> Next ></button>
-      <button {...startButtonProps}> Start!</button>
-      <button {...showScoreButtonProps}> Last one!</button>
+      <div className={(!loading && !finished) ? '' : 'hidden'}>
+        <GuessCard {...cardProps} />
+      </div>
+      <div {...scoreProps}>
+        <p className='GuessCards-score'>
+          <span>{score}</span>
+        </p>
+      </div>
     </div>
   )
 }
@@ -82,7 +73,5 @@ const App = connect(
   mapStateToProps,
   mapDispatchToProps
 )(GuessCardsApp)
-
-
 
 export default hot(module)(App)

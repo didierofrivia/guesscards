@@ -18,7 +18,7 @@ const characters = [
   },
   {
     id: '4',
-    name: 'Professor Hubert',
+    name: 'Hubert',
     picture: 'hubert.png'
   },
   {
@@ -28,12 +28,12 @@ const characters = [
   },
   {
     id: '6',
-    name: 'Amy Wong',
+    name: 'Amy',
     picture: 'amy.png'
   },
   {
     id: '7',
-    name: 'Hermes Conrad',
+    name: 'Hermes',
     picture: 'hermes.png'
   }
 ]
