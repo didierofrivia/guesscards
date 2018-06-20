@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import { hot } from 'react-hot-loader'
 import { connect } from 'react-redux'
@@ -7,7 +9,10 @@ import * as actions from '../actions/index'
 import 'reset-css'
 import '../styles/styles.scss'
 
-const mapStateToProps = (state) => {
+import type { State, Card } from '../reducers/initialState'
+import type { Action, Dispatch } from '../actions/index'
+
+const mapStateToProps = (state: State) => {
   return {
     deck: state.deck,
     current: state.current,
@@ -18,7 +23,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     boundActionCreators: bindActionCreators(actions, dispatch)
   }
@@ -32,10 +37,19 @@ const GuessCardsApp = ({
   loading,
   finished,
   boundActionCreators
+}: {
+  deck: Array<Card>,
+  current: Card,
+  score: number,
+  guess: string,
+  loading: boolean,
+  finished: boolean,
+  boundActionCreators: () => Action
 }) => {
   const cardProps = {
     current,
     deck,
+    loading,
     guess,
     startGame: (_ev) => boundActionCreators.startGame(),
     nextCard: (_ev) => boundActionCreators.nextCard(),

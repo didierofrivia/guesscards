@@ -1,7 +1,20 @@
+// @flow
+
 import { initialState } from './initialState'
 
-function createReducer (initialState, handlers) {
-  return function reducer (state = initialState, action) {
+import type { State } from './initialState'
+import type {
+  ReducerAction,
+  UpdateDeck,
+  DrawCard,
+  UpdateScore,
+  UpdateGuess,
+  ToggleLoading,
+  EndGame
+} from '../actions/index'
+
+function createReducer (initialState: State, handlers: any): (State, ReducerAction) => State {
+  return function reducer (state: State = initialState, action: ReducerAction): State {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action)
     } else {
@@ -10,21 +23,17 @@ function createReducer (initialState, handlers) {
   }
 }
 
-function updateObject (oldObj, newObj) {
+function updateObject (oldObj: Object, newObj: Object): Object {
   return Object.assign({}, oldObj, newObj)
 }
 
-function updateScore (state, action) {
-  return updateObject(state, {score: state.score + action.score})
-}
-
 const rootReducer = createReducer(initialState, {
-  'UPDATE_DECK': (state, action) => updateObject(state, {deck: action.deck}),
-  'DRAW_CARD': (state, action) => updateObject(state, {current: action.current}),
-  'UPDATE_SCORE': updateScore,
-  'UPDATE_GUESS': (state, action) => updateObject(state, {guess: action.guess}),
-  'TOGGLE_LOADING': (state, action) => updateObject(state, {loading: action.loading}),
-  'END_GAME': (state, action) => updateObject(state, {finished: true})
+  'UPDATE_DECK': (state: State, action: UpdateDeck) => updateObject(state, {deck: action.deck}),
+  'DRAW_CARD': (state: State, action: DrawCard) => updateObject(state, {current: action.current}),
+  'UPDATE_SCORE': (state: State, action: UpdateScore) => updateObject(state, {score: state.score + action.score}),
+  'UPDATE_GUESS': (state: State, action: UpdateGuess) => updateObject(state, {guess: action.guess}),
+  'TOGGLE_LOADING': (state: State, action: ToggleLoading) => updateObject(state, {loading: action.loading}),
+  'END_GAME': (state: State, action: EndGame) => updateObject(state, {finished: true})
 })
 
 export default rootReducer

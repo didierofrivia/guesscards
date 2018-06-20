@@ -1,10 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Provider } from 'react-redux'
+// @flow
 
+import React from 'react'
+import { Provider } from 'react-redux'
 import App from './App'
 
-export default function Root (props) {
+import type { Store } from 'redux'
+
+export default function Root (props: {store: Store}) {
   const { store } = props
 
   return (
@@ -12,8 +14,4 @@ export default function Root (props) {
       <App store={store} />
     </Provider>
   )
-}
-
-Root.propTypes = {
-  store: PropTypes.object.isRequired
 }

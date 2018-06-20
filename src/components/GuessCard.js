@@ -1,6 +1,16 @@
+// @flow
+
 import React from 'react'
 
-const Card = ({
+import type { Card } from '../reducers/initialState'
+import type {
+  StartGame,
+  UpdateGuess,
+  NextCard,
+  ShowScore
+} from '../actions/index'
+
+const GuessCard = ({
   current,
   guess,
   deck,
@@ -9,6 +19,15 @@ const Card = ({
   updateGuess,
   nextCard,
   showScore
+}: {
+  current: Card,
+  guess: string,
+  deck: Array<Card>,
+  loading: boolean,
+  startGame: () => StartGame,
+  updateGuess: () => UpdateGuess,
+  nextCard: () => NextCard,
+  showScore: () => ShowScore
 }) => {
   const nextVisible = (deck.length > 0)
   const startVisible = (
@@ -49,4 +68,4 @@ const Card = ({
   )
 }
 
-export default Card
+export default GuessCard

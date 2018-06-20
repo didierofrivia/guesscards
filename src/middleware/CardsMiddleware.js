@@ -1,3 +1,5 @@
+// @flow
+
 import {
   updateScore,
   drawCard,
@@ -7,17 +9,20 @@ import {
   endGame
 } from '../actions/index'
 
-function calculate (cardName, guess) {
+import type { Dispatch, GetState, MiddlewareAction } from '../actions/index'
+import type { Card } from '../reducers/initialState'
+
+function calculate (cardName: string, guess: string) {
   return (cardName.toUpperCase() === guess.toUpperCase()) ? 10 : 0
 }
 
-function dealGame (deck, dispatch) {
-  var deckCopy = Object.assign([], deck) // TODO: find a better way of doing this
+function dealGame (deck: Array<Card>, dispatch: Dispatch) {
+  var deckCopy = deck.slice()
   dispatch(drawCard(deckCopy.pop()))
   dispatch(updateDeck(deckCopy))
 }
 
-const cardsMiddleware = ({ dispatch, getState }) => (next) => (action) => {
+const cardsMiddleware = ({ dispatch, getState }: { dispatch: Dispatch, getState: GetState}) => (next: any) => (action: MiddlewareAction) => {
   const state = getState()
   const deck = state.deck
   switch (action.type) {
