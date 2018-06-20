@@ -10,7 +10,6 @@ const Card = ({
   nextCard,
   showScore
 }) => {
-
   const nextVisible = (deck.length > 0)
   const startVisible = (
     Object.keys(current).length === 0 && current.constructor === Object
@@ -22,30 +21,30 @@ const Card = ({
     type: 'text'
   }
   const nextButtonProps = {
-    disabled: (guess.length === 0) ? true : false,
-    className: (nextVisible && !startVisible) ? 'GuessCard-button' : 'GuessCard-button hidden',
+    disabled: (guess.length === 0),
+    className: `GuessCard-button ${(nextVisible && !startVisible) ? '' : 'hidden'}`,
     onClick: nextCard
   }
 
   const startButtonProps = {
-    className: startVisible ? 'GuessCard-button' : 'GuessCard-button hidden',
+    className: `GuessCard-button ${startVisible ? '' : 'hidden'}`,
     onClick: startGame,
-    disabled: loading ? true : false
+    disabled: loading
   }
   const showScoreButtonProps = {
-    className: (!startVisible && !nextVisible) ? 'GuessCard-button' : 'GuessCard-button hidden',
+    className: `GuessCard-button ${(!startVisible && !nextVisible) ? '' : 'hidden'}`,
     onClick: showScore
   }
 
   return (
     <div className='GuessCard-container'>
-        <img className='GuessCard-image' src={require(`../images/${current.picture}`)} />
-        <input {...inputProps} />
-        <div className='GuessCard-buttons'>
-          <button {...nextButtonProps}> Next ></button>
-          <button {...startButtonProps}> Start!</button>
-          <button {...showScoreButtonProps}> Last one!</button>
-        </div>
+      <img className='GuessCard-image' src={require(`../images/${current.picture}`)} />
+      <input {...inputProps} />
+      <div className='GuessCard-buttons'>
+        <button {...nextButtonProps}> Next ></button>
+        <button {...startButtonProps}> Start!</button>
+        <button {...showScoreButtonProps}> Last one!</button>
+      </div>
     </div>
   )
 }

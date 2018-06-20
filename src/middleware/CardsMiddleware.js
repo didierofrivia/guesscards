@@ -4,7 +4,6 @@ import {
   updateDeck,
   calculateScore,
   updateGuess,
-  showScore,
   endGame
 } from '../actions/index'
 
@@ -36,6 +35,7 @@ const cardsMiddleware = ({ dispatch, getState }) => (next) => (action) => {
     case 'SHOW_SCORE':
       dispatch(calculateScore())
       dispatch(endGame())
+      break
     default:
       return next(action)
   }

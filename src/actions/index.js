@@ -11,7 +11,7 @@ function fetchCards () {
 }
 
 function toggleLoading (loading) {
-  return { type: 'TOGGLE_LOADING', loading}
+  return { type: 'TOGGLE_LOADING', loading }
 }
 
 function startGame () {

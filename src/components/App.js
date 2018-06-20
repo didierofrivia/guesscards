@@ -49,7 +49,7 @@ const GuessCardsApp = ({
   }
 
   const scoreProps = {
-    className: (finished) ? 'GuessCards-score-container' : 'GuessCards-score-container hidden',
+    className: (finished) ? 'GuessCards-score-container' : 'GuessCards-score-container hidden'
   }
 
   return (

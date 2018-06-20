@@ -1,4 +1,4 @@
-import delay from './delay';
+import delay from './delay'
 
 const characters = [
   {
@@ -39,12 +39,12 @@ const characters = [
 ]
 
 class FuturamaCharactersApi {
-  static getCharacters() {
+  static getCharacters () {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(Object.assign([], characters))
       }, delay)
-    });
+    })
   }
 }
 

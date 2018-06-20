@@ -7,6 +7,15 @@ module.exports = env => {
     module: {
       rules: [
         {
+          test: /\.jsx?$/,
+          exclude: /(node_modules)/,
+          enforce: 'pre',
+          loader: 'eslint-loader',
+          options: {
+            configFile: '.eslintrc'
+          }
+        },
+        {
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
