@@ -1,4 +1,4 @@
-import delay from './delay'
+const delay = require('./delay')
 
 const characters = [
   {
@@ -38,7 +38,7 @@ const characters = [
   }
 ]
 
-class FuturamaCharactersApi {
+class FuturamaCharacters {
   static getCharacters () {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -48,4 +48,4 @@ class FuturamaCharactersApi {
   }
 }
 
-export default FuturamaCharactersApi
+module.exports = FuturamaCharacters

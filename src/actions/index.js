@@ -1,16 +1,31 @@
 // @flow
 /* eslint-disable no-use-before-define */
-
+import { RSAA } from 'redux-api-middleware'
 import type { State, Card } from '../reducers/initialState'
-import FuturamaCharactersApi from '../api/futurama_characters'
 
-function fetchCards () {
-  return function (dispatch: Dispatch) {
-    FuturamaCharactersApi.getCharacters().then(response => {
-      dispatch(updateDeck(response))
-      dispatch(startGame())
-      dispatch(toggleLoading(false))
-    })
+export type RSSAAction = {
+  [string]: {
+    endpoint: string,
+    method: string,
+    credentials: string,
+    types: []
+  }
+}
+
+type FetchCardsSuccess = { type: 'FETCH_CARDS_SUCCESS', payload: Array<Card>, meta: ?{} }
+type FetchCardsError = { type: 'FETCH_CARDS_ERROR', payload: Object, error: boolean, meta: ?{} }
+
+const REQUEST = { type: 'FETCH_CARDS_REQUEST' }
+const SUCCESS = { type: 'FETCH_CARDS_SUCCESS' }
+const FAILURE = { type: 'FETCH_CARDS_ERROR' }
+
+function fetchCards (): RSSAAction {
+  return {
+    [RSAA]: {
+      endpoint: 'http://localhost:8000/characters',
+      method: 'GET',
+      types: [REQUEST, SUCCESS, FAILURE]
+    }
   }
 }
 
@@ -67,6 +82,7 @@ function endGame (): EndGame {
 export type ReducerAction = UpdateDeck | DrawCard | UpdateScore | UpdateGuess
   | ToggleLoading | EndGame
 export type MiddlewareAction = StartGame | NextCard | CalculateScore | ShowScore
+  | FetchCardsSuccess | FetchCardsError
 export type Action = ReducerAction | MiddlewareAction
 
 export type Dispatch = (action: Action | ThunkAction | PromiseAction | Array<Action>) => any

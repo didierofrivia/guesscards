@@ -1,1 +1,1 @@
-export default 2000
+module.export = 2000

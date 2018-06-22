@@ -57,7 +57,7 @@ const GuessCard = ({
 
   return (
     <div className='GuessCard-container'>
-      <img className='GuessCard-image' src={require(`../images/${current.picture}`)} />
+      <img className='GuessCard-image' src={`http://localhost:8000/images/${current.picture}`} />
       <input {...inputProps} />
       <div className='GuessCard-buttons'>
         <button {...nextButtonProps}> Next ></button>

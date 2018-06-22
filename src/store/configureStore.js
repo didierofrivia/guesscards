@@ -1,11 +1,13 @@
 import {createStore, compose, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
+import {apiMiddleware} from 'redux-api-middleware'
 import {cardsMiddleware} from '../middleware/CardsMiddleware'
 import rootReducer from '../reducers'
 
 function configureStoreProd (initialState) {
   const middlewares = [
     thunk,
+    apiMiddleware,
     cardsMiddleware
   ]
 
@@ -17,6 +19,7 @@ function configureStoreProd (initialState) {
 function configureStoreDev (initialState) {
   const middlewares = [
     thunk,
+    apiMiddleware,
     cardsMiddleware
   ]
 

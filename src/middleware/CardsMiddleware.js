@@ -6,7 +6,9 @@ import {
   updateDeck,
   calculateScore,
   updateGuess,
-  endGame
+  endGame,
+  startGame,
+  toggleLoading
 } from '../actions/index'
 
 import type { Dispatch, GetState, MiddlewareAction } from '../actions/index'
@@ -25,7 +27,16 @@ function dealGame (deck: Array<Card>, dispatch: Dispatch) {
 const cardsMiddleware = ({ dispatch, getState }: { dispatch: Dispatch, getState: GetState}) => (next: any) => (action: MiddlewareAction) => {
   const state = getState()
   const deck = state.deck
+
   switch (action.type) {
+    case 'FETCH_CARDS_SUCCESS':
+      dispatch(updateDeck(action.payload))
+      dispatch(startGame())
+      dispatch(toggleLoading(false))
+      break
+    case 'FETCH_CARDS_ERROR':
+      console.log('shiiiiiiiiiet')
+      break
     case 'CALCULATE_SCORE':
       dispatch(updateScore(calculate(state.current.name, state.guess)))
       break
