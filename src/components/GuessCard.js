@@ -13,23 +13,25 @@ import type {
 const GuessCard = ({
   current,
   guess,
-  deck,
+  apiUrl,
+  deckLegth,
   loading,
   startGame,
   updateGuess,
   nextCard,
   showScore
 }: {
+  apiUrl: string,
   current: Card,
   guess: string,
-  deck: Array<Card>,
+  deckLegth: number,
   loading: boolean,
   startGame: () => StartGame,
   updateGuess: () => UpdateGuess,
   nextCard: () => NextCard,
   showScore: () => ShowScore
 }) => {
-  const nextVisible = (deck.length > 0)
+  const nextVisible = (deckLegth > 0)
   const startVisible = (
     Object.keys(current).length === 0 && current.constructor === Object
   )
@@ -41,23 +43,23 @@ const GuessCard = ({
   }
   const nextButtonProps = {
     disabled: (guess.length === 0),
-    className: `GuessCard-button ${(nextVisible && !startVisible) ? '' : 'hidden'}`,
+    className: `GuessCardButton GuessCardButton-next ${(nextVisible && !startVisible) ? '' : 'hidden'}`,
     onClick: nextCard
   }
 
   const startButtonProps = {
-    className: `GuessCard-button ${startVisible ? '' : 'hidden'}`,
+    className: `GuessCardButton GuessCardButton-start ${startVisible ? '' : 'hidden'}`,
     onClick: startGame,
     disabled: loading
   }
   const showScoreButtonProps = {
-    className: `GuessCard-button ${(!startVisible && !nextVisible) ? '' : 'hidden'}`,
+    className: `GuessCardButton GuessCardButton-score ${(!startVisible && !nextVisible) ? '' : 'hidden'}`,
     onClick: showScore
   }
 
   return (
     <div className='GuessCard-container'>
-      <img className='GuessCard-image' src={`http://localhost:8000/images/${current.picture}`} />
+      <img className='GuessCard-image' src={`${apiUrl}/images/${current.picture}`} />
       <input {...inputProps} />
       <div className='GuessCard-buttons'>
         <button {...nextButtonProps}> Next ></button>

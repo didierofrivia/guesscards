@@ -19,10 +19,10 @@ const REQUEST = { type: 'FETCH_CARDS_REQUEST' }
 const SUCCESS = { type: 'FETCH_CARDS_SUCCESS' }
 const FAILURE = { type: 'FETCH_CARDS_ERROR' }
 
-function fetchCards (): RSSAAction {
+function fetchCards (url: string): RSSAAction {
   return {
     [RSAA]: {
-      endpoint: 'http://localhost:8000/characters',
+      endpoint: `${url}/characters`,
       method: 'GET',
       types: [REQUEST, SUCCESS, FAILURE]
     }

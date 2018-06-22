@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack-dev-server --open --env.NODE_ENV=development --hot",
+    "dev": "webpack-dev-server --open --env.NODE_ENV=development --env.API_URL=http://localhost:8000 --hot",
     "watch": "webpack --watch",
     "server": "node src/api/server.js",
     "test": "jest",

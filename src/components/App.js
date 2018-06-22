@@ -12,8 +12,10 @@ import '../styles/styles.scss'
 import type { State, Card } from '../reducers/initialState'
 import type { Action, Dispatch } from '../actions/index'
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: State, props: {apiUrl: string}) => {
+  const {apiUrl} = props
   return {
+    apiUrl,
     deck: state.deck,
     current: state.current,
     score: state.score,
@@ -30,6 +32,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 }
 
 const GuessCardsApp = ({
+  apiUrl,
   deck,
   current,
   score,
@@ -38,6 +41,7 @@ const GuessCardsApp = ({
   finished,
   boundActionCreators
 }: {
+  apiUrl: string,
   deck: Array<Card>,
   current: Card,
   score: number,
@@ -47,8 +51,9 @@ const GuessCardsApp = ({
   boundActionCreators: () => Action
 }) => {
   const cardProps = {
+    apiUrl,
     current,
-    deck,
+    deckLegth: deck.length,
     loading,
     guess,
     startGame: (_ev) => boundActionCreators.startGame(),

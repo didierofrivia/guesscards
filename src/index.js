@@ -6,7 +6,8 @@ import { initialState } from './reducers/initialState'
 import { fetchCards } from './actions/index'
 
 const store = configureStore(initialState)
+const apiUrl = process.env.API_URL
 
-store.dispatch(fetchCards())
+store.dispatch(fetchCards(apiUrl))
 
-render(<Root store={store} />, document.getElementById('app'))
+render(<Root apiUrl={apiUrl} store={store} />, document.getElementById('app'))

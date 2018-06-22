@@ -109,6 +109,10 @@ module.exports = env => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.ejs'
+      }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV || 'development'),
+        'process.env.API_URL': JSON.stringify(env.API_URL || 'http://localhost:8000/'),
       })
     ]
   }

@@ -6,12 +6,12 @@ import App from './App'
 
 import type { Store } from 'redux'
 
-export default function Root (props: {store: Store}) {
-  const { store } = props
+export default function Root (props: {store: Store, apiUrl: string}) {
+  const { store, apiUrl } = props
 
   return (
     <Provider store={store}>
-      <App store={store} />
+      <App apiUrl={apiUrl} store={store} />
     </Provider>
   )
 }
