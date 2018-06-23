@@ -7,7 +7,7 @@ const cors = require('cors')
 const port = 8000
 
 app.use(cors())
-app.use('/images', express.static('src/api/images'))
+app.use('/images', express.static('api/images'))
 
 
 app.listen(port, () => {

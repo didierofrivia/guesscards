@@ -7,7 +7,7 @@
     "build": "webpack",
     "dev": "webpack-dev-server --open --env.NODE_ENV=development --env.API_URL=http://localhost:8000 --hot",
     "watch": "webpack --watch",
-    "server": "node src/api/server.js",
+    "server": "node api/server.js",
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
