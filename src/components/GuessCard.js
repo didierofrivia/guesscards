@@ -39,7 +39,9 @@ const GuessCard = ({
     value: guess,
     onChange: updateGuess,
     className: (!startVisible) ? 'GuessCard-input' : 'GuessCard-input hidden',
-    type: 'text'
+    type: 'text',
+    autoFocus: 'autofocus',
+    placeHolder: 'Hank'
   }
   const nextButtonProps = {
     disabled: (guess.length === 0),
@@ -58,15 +60,15 @@ const GuessCard = ({
   }
 
   return (
-    <div className='GuessCard-container'>
+    <article className='GuessCard-article'>
       <img className='GuessCard-image' src={`${apiUrl}/images/${current.picture}`} />
-      <input {...inputProps} />
+      <input className='GuessCard-input' {...inputProps} />
       <div className='GuessCard-buttons'>
         <button {...nextButtonProps}> Next ></button>
         <button {...startButtonProps}> Start!</button>
         <button {...showScoreButtonProps}> Last one!</button>
       </div>
-    </div>
+    </article>
   )
 }
 

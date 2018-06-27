@@ -76,7 +76,7 @@ const GuessCardsApp = ({
       <div className="GuessCards-loading-container">
         <img {...loadingImageProps} />
       </div>
-      <div className={(!loading && !finished) ? '' : 'hidden'}>
+      <div className={(!loading && !finished) ? 'GuessCard-container' : 'GuessCard-container hidden'}>
         <GuessCard {...cardProps} />
       </div>
       <div {...scoreProps}>
