@@ -2,14 +2,16 @@
 
 It's just a simple game of guessing the name of Futurama characters. Why doing this? Just for the fun of building a simple React/Redux app.
 
+![Guess Cards](https://github.com/ddcesare/guesscards/raw/master/src/images/example.png)
+
 ## Run in dev mode
-Install dependencies:
+1. Install dependencies:
   `$ npm install`
 
-Run the dev server:
+2. Run the API dev server (source of Futurama characters):
   `$ npm run server`
 
-Then the app:
+3. Then the app:
   `$ npm run dev`
 
-Profit!
+4. Profit!
