@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react'
-
 import type { Card } from '../reducers/initialState'
+import { addHiddenClass } from '../utils/index'
 import type {
   StartGame,
   UpdateGuess,
@@ -38,27 +38,29 @@ const GuessCard = ({
   const inputProps = {
     value: guess,
     onChange: updateGuess,
-    className: (!startVisible) ? 'GuessCard-input' : 'GuessCard-input hidden',
-    type: 'text'
+    className: addHiddenClass(!startVisible, 'GuessCard-input'),
+    type: 'text',
+    autoFocus: 'autofocus',
+    placeholder: 'e.g. Hank'
   }
   const nextButtonProps = {
     disabled: (guess.length === 0),
-    className: `GuessCardButton GuessCardButton-next ${(nextVisible && !startVisible) ? '' : 'hidden'}`,
+    className: addHiddenClass((nextVisible && !startVisible), 'GuessCardButton GuessCardButton-next'),
     onClick: nextCard
   }
 
   const startButtonProps = {
-    className: `GuessCardButton GuessCardButton-start ${startVisible ? '' : 'hidden'}`,
+    className: addHiddenClass(startVisible, 'GuessCardButton GuessCardButton-start'),
     onClick: startGame,
     disabled: loading
   }
   const showScoreButtonProps = {
-    className: `GuessCardButton GuessCardButton-score ${(!startVisible && !nextVisible) ? '' : 'hidden'}`,
+    className: addHiddenClass((!startVisible && !nextVisible), 'GuessCardButton GuessCardButton-score'),
     onClick: showScore
   }
 
   return (
-    <div className='GuessCard-container'>
+    <article className='GuessCard-article'>
       <img className='GuessCard-image' src={`${apiUrl}/images/${current.picture}`} />
       <input {...inputProps} />
       <div className='GuessCard-buttons'>
@@ -66,7 +68,7 @@ const GuessCard = ({
         <button {...startButtonProps}> Start!</button>
         <button {...showScoreButtonProps}> Last one!</button>
       </div>
-    </div>
+    </article>
   )
 }
 

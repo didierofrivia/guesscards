@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import GuessCard from './GuessCard'
 import * as actions from '../actions/index'
+import { addHiddenClass } from '../utils/index'
 import 'reset-css'
 import '../styles/styles.scss'
 
@@ -63,12 +64,16 @@ const GuessCardsApp = ({
   }
 
   const loadingImageProps = {
-    className: (loading) ? 'GuessCards-loading' : 'GuessCards-loading hidden',
+    className: addHiddenClass(loading, 'GuessCards-loading'),
     src: require('../images/loading.gif')
   }
 
   const scoreProps = {
-    className: (finished) ? 'GuessCards-score-container' : 'GuessCards-score-container hidden'
+    className: addHiddenClass(finished, 'GuessCards-score-container')
+  }
+
+  const containerProps = {
+    className: addHiddenClass((!loading && !finished), 'GuessCard-container')
   }
 
   return (
@@ -76,7 +81,7 @@ const GuessCardsApp = ({
       <div className="GuessCards-loading-container">
         <img {...loadingImageProps} />
       </div>
-      <div className={(!loading && !finished) ? '' : 'hidden'}>
+      <div {...containerProps}>
         <GuessCard {...cardProps} />
       </div>
       <div {...scoreProps}>

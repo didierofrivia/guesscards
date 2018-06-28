@@ -1,82 +1,137 @@
-$base-color: #ccc;
-$main-color: #7b6666;
-$lookatthis-color: #c32727;
+$background-color: white;
+$color: #7b6666;
+$highlight-color: #c32727;
+
+html, body {
+  height: 100%;
+}
+
+body {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 
 .GuessCards-container,
 .GuessCards-score-container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  color: $main-color;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 500px;
+  color: $color;
+  max-width: 40rem;
+  min-height: 40rem;
 }
 
 .GuessCard-container,
 .GuessCards-score {
-  border: 1px solid $base-color;
-  border-radius: 10px;
-  padding: 20px;
+  background-color: white;
+  border: .2rem solid $background-color;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.GuessCard-container {
+  position: relative;
+  transform: rotate(2deg);
+  z-index: 5;
+
+  &::before,
+  &::after {
+    background-color: darken($highlight-color, 2);
+    border: .2rem solid $background-color;
+    border-radius: 1rem;
+    bottom: 0;
+    content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: rotate(-10deg);
+    z-index: -1;
+  }
+
+  &::after {
+    background-color: darken($highlight-color, 20);
+    transform: rotate(-4deg);
+    z-index: -2;
+  }
 }
 
 .GuessCards-score-container {
 
   &::after {
-    content: "";
+    animation: animatedBackground 40s linear infinite;
     background: center no-repeat url('../images/futurama_background.png');
-    opacity: 0.4;
-    top: 0;
-    left: 0;
+    border-radius: 1rem;
     bottom: 0;
-    right: 0;
+    content: '';
+    left: 0;
+    opacity: .4;
     position: absolute;
+    right: 0;
+    top: 0;
     z-index: -1;
-    border-radius: 10px;
-    animation: animatedBackground 40s linear infinite
   }
 }
 
 @keyframes animatedBackground {
-	from { background-position: -50 0; }
-	to { background-position: 100% 0; }
+  from {
+    background-position: -50 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
 }
 
 .GuessCards-score {
+  background-color: $background-color;
+  font-size: 3rem;
+  margin-top: 30rem;
   text-align: center;
-  font-size: 50px;
-  background: white;
-
+  transform: rotate(-6deg);
 
   span {
-    color: $lookatthis-color;
+    color: $highlight-color;
   }
+}
+
+.GuessCard-article {
+  background-color: $background-color;
+  border: .2rem solid $background-color;
+  border-radius: 1rem;
+  padding: 2rem;
+  position: relative;
+  z-index: 5;
 }
 
 .GuessCard-image {
   display: block;
-  max-width: 250px;
-  max-height: 500px;
-  min-height: 250px;
-  margin: 0 auto;
+  height: 30rem;
+  margin: 2rem 0;
+  width: auto;
 }
 
 .GuessCard-input {
+  border: 0;
   display: block;
-  max-width: 200px;
-  margin: 10px auto;
+  float: left;
+  font-size: 2rem;
+  outline: 0;
+  width: 50%;
 }
 
 .GuessCard-buttons {
-  margin: 10px;
-  border-top: 1px solid $base-color;
-  padding: 10px 0;
+  text-align: right;
 }
 
 .GuessCardButton {
-  display: block;
-  float: right;
+  background-color: $background-color;
+  border: 0;
+  color: $highlight-color;
+  cursor: pointer;
+  font-size: 2rem;
+
+  &:disabled {
+    color: $background-color;
+  }
 }
 
 .hidden {
